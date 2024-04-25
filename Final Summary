@@ -1,5 +1,14 @@
 My project goals are a little different, I felt like it was hard for me to learn and pick up on things. I want tomake a code about a maze
 Instructions- The player needs to navigate through the a mzae using arrow keys and avoid hitting the obstacles to reach the goal. 
 My process with this was different, i wanted it to be challenging but capable of doing it as well. 
-My technologies and tyechniques used was 
+My technologies and tyechniques used was the gaming language, game loop, input handeling, functions, user interaction, console based interface, and proceduarl generation.
 My reflection on this class was hard. I liked the class and how you taught but coming in it had already felt as if everybody was ahead of me and I was already playing catch up up. I would like to improve everything. It was hard to stay on track only because everyone was so far ahead and I didn't ask questions. You are a great teacher
+
+
+ defined constants for maze dimensions, player symbol, maze symbols, and directions.
+ implemented functions to initialize the maze, display the maze, check if the player has won, move the player, and the main function to run the game.
+The initialize_maze function creates a maze with random obstacles and places the goal randomly within the maze.
+The display_maze function prints the current state of the maze with the player's position.
+The has_won function checks if the player's position matches the goal position.
+The move_player function updates the player's position based on the input direction.
+The play_game function runs the main game loop, allowing the player to make moves until they reach the goal.
