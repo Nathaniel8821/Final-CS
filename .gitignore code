@@ -1,0 +1,85 @@
+# Define the maze dimensions
+MAZE_SIZE = 5
+
+# Define the player symbol
+PLAYER_SYMBOL = "P"
+
+# Define the maze symbols
+EMPTY_SYMBOL = "."
+OBSTACLE_SYMBOL = "#"
+GOAL_SYMBOL = "G"
+
+# Define the directions
+DIRECTIONS = {
+    "up": (-1, 0),
+    "down": (1, 0),
+    "left": (0, -1),
+    "right": (0, 1)
+}
+
+# Initialize the maze with random obstacles
+def initialize_maze(size):
+    maze = [[EMPTY_SYMBOL for _ in range(size)] for _ in range(size)]
+    for _ in range(size):
+        row = random.randint(0, size-1)
+        col = random.randint(0, size-1)
+        maze[row][col] = OBSTACLE_SYMBOL
+    # Place the goal randomly
+    goal_row = random.randint(0, size-1)
+    goal_col = random.randint(0, size-1)
+    maze[goal_row][goal_col] = GOAL_SYMBOL
+    return maze
+
+# Display the maze
+def display_maze(maze, player_position):
+    for i, row in enumerate(maze):
+        for j, cell in enumerate(row):
+            if (i, j) == player_position:
+                print(PLAYER_SYMBOL, end=" ")
+            else:
+                print(cell, end=" ")
+        print()
+
+# Check if the player has reached the goal
+def has_won(player_position, goal_position):
+    return player_position == goal_position
+
+# Move the player
+def move_player(player_position, direction):
+    new_row = player_position[0] + DIRECTIONS[direction][0]
+    new_col = player_position[1] + DIRECTIONS[direction][1]
+    return (new_row, new_col)
+
+# Main function to run the game
+def play_game():
+    maze = initialize_maze(MAZE_SIZE)
+    player_position = (0, 0)
+    goal_position = None
+    for i in range(MAZE_SIZE):
+        for j in range(MAZE_SIZE):
+            if maze[i][j] == GOAL_SYMBOL:
+                goal_position = (i, j)
+                break
+        if goal_position:
+            break
+    print("Welcome to the maze game!")
+    while not has_won(player_position, goal_position):
+        print("\nCurrent Maze:")
+        display_maze(maze, player_position)
+        direction = input("Enter your move (up/down/left/right): ").lower()
+        if direction in DIRECTIONS:
+            new_position = move_player(player_position, direction)
+            if 0 <= new_position[0] < MAZE_SIZE and 0 <= new_position[1] < MAZE_SIZE:
+                if maze[new_position[0]][new_position[1]] != OBSTACLE_SYMBOL:
+                    player_position = new_position
+                else:
+                    print("Oops! You hit an obstacle. Try again.")
+            else:
+                print("Oops! You can't move there. Try again.")
+        else:
+            print("Invalid input! Please enter up, down, left, or right.")
+    print("\nCongratulations! You reached the goal!")
+
+# Run the game
+play_game()
+
